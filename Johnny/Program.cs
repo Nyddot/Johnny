@@ -453,7 +453,7 @@ namespace Johnny {
             CriaDirVideo();
             CriaDirResto();
             CriaDirTexto();
-            //:D
+            //Salve Mister Danas :D
         }
     }
 }
