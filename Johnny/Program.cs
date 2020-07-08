@@ -453,6 +453,7 @@ namespace Johnny {
             CriaDirVideo();
             CriaDirResto();
             CriaDirTexto();
+            //:D
         }
     }
 }
