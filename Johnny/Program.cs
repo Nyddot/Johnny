@@ -103,7 +103,9 @@ namespace Johnny {
 
                 string destinoBackup = @"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\";
 
-                File.Move(Path.Combine(destinoLetra, file.Name), Path.Combine(destinoBackup, file.LastAccessTime.ToString("dd-mm-yyyy hh-MM-ss") + " - " + file.Name));
+                File.Move(Path.Combine(destinoLetra, file.Name), 
+                    Path.Combine(
+                        destinoBackup, file.LastAccessTime.ToString("dd-mm-yyyy hh-MM-ss") + " - " + file.Name));
 
                 Console.WriteLine("Arquivo duplicado movido para o Backup!");
 
