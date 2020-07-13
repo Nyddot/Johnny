@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -13,10 +14,12 @@ namespace Johnny {
         static Document doc = new Document(pdfDoc);
         static string relatorio = "";
 
-        static void AlteraTexto(String arquivo) {
+        static void AlteraTexto(String arquivo)
+        {
             string diretorio = arquivo;
 
-            if (File.ReadAllText(diretorio).Contains("[nomeproprio]")) {
+            if (File.ReadAllText(diretorio).Contains("[nomeproprio]"))
+            {
                 string textoAntes = File.ReadAllText(diretorio);
 
                 Console.WriteLine("Arquivo antes de ser sobreescrito:\n" + textoAntes);
@@ -29,13 +32,15 @@ namespace Johnny {
             }
         }
 
-        static void MovedorImagem(FileInfo file) {
+        static void MovedorImagem(FileInfo file)
+        {
             string destinoImagem = (@"C:\Users\vinicius.waltrick\Documents\Johnny\imagem\");
             string fileNameSubstring = file.Name.Substring(0, 1);
             string destinoLetra = (@"C:\Users\vinicius.waltrick\Documents\Johnny\imagem\" + fileNameSubstring + @"\");
 
-            if (!Directory.Exists(destinoImagem + fileNameSubstring)) {
-                DirectoryInfo dir = Directory.CreateDirectory(destinoImagem + fileNameSubstring);
+            if (!Directory.Exists(destinoImagem + fileNameSubstring))
+            {
+                Directory.CreateDirectory(destinoImagem + fileNameSubstring);
 
                 Console.WriteLine(@$"O diretório {fileNameSubstring} foi criado com sucesso!");
 
@@ -44,7 +49,9 @@ namespace Johnny {
                 Console.WriteLine($"{file} movido para o novo diretorio alfabetico com sucesso");
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else if (File.Exists(destinoLetra + file.Name)) {
+            }
+            else if (File.Exists(destinoLetra + file.Name))
+            {
                 CriaDirBackup();
                 string destinoBackup = @"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\";
 
@@ -59,7 +66,9 @@ namespace Johnny {
                     $"sucesso e substituiu o arquivo deste dir");
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else {
+            }
+            else
+            {
                 File.Move(file.FullName, destinoLetra + file.Name);
 
                 Console.WriteLine($"{file} movido para o diretorio alfabetico já existente com sucesso");
@@ -68,13 +77,15 @@ namespace Johnny {
             }
         }
 
-        static void MovedorMusica(FileInfo file) {
+        static void MovedorMusica(FileInfo file)
+        {
             string destinoMusica = (@"C:\Users\vinicius.waltrick\Documents\Johnny\musica\");
             string fileNameSubstring = file.Name.Substring(0, 1);
             string destinoLetra = Path.Combine(@"C:\Users\vinicius.waltrick\Documents\Johnny\musica\", fileNameSubstring);
 
-            if (!Directory.Exists(destinoMusica + fileNameSubstring)) {
-                DirectoryInfo dir = Directory.CreateDirectory(destinoMusica + fileNameSubstring);
+            if (!Directory.Exists(destinoMusica + fileNameSubstring))
+            {
+                Directory.CreateDirectory(destinoMusica + fileNameSubstring);
 
                 Console.WriteLine(@$"O diretório {fileNameSubstring} foi criado com sucesso!");
 
@@ -83,7 +94,9 @@ namespace Johnny {
                 Console.WriteLine($"{file} movido para o novo diretorio alfabetico com sucesso");
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else if (File.Exists(destinoLetra + file.Name)) {
+            }
+            else if (File.Exists(destinoLetra + file.Name))
+            {
                 Console.WriteLine($"{file} movido para o diretorio alfabetico já existente com " +
                     $"sucesso e substituiu o arquivo deste dir");
 
@@ -98,7 +111,9 @@ namespace Johnny {
                 File.Move(file.FullName, Path.Combine(destinoLetra, file.Name));
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else {
+            }
+            else
+            {
                 File.Move(file.FullName, Path.Combine(destinoLetra, file.Name));
 
                 Console.WriteLine($"{file} movido para o diretorio alfabetico já existente com sucesso");
@@ -107,14 +122,16 @@ namespace Johnny {
             }
         }
 
-        static void MovedorVideo(FileInfo file) {
+        static void MovedorVideo(FileInfo file)
+        {
 
             string destinoVideo = (@"C:\Users\vinicius.waltrick\Documents\Johnny\video\");
             string fileNameSubstring = file.Name.Substring(0, 1);
             string destinoLetra = (@"C:\Users\vinicius.waltrick\Documents\Johnny\video\" + fileNameSubstring + @"\");
 
-            if (!Directory.Exists(destinoVideo + fileNameSubstring)) {
-                DirectoryInfo dir = Directory.CreateDirectory(destinoVideo + fileNameSubstring);
+            if (!Directory.Exists(destinoVideo + fileNameSubstring))
+            {
+                Directory.CreateDirectory(destinoVideo + fileNameSubstring);
 
                 Console.WriteLine(@$"O diretório {fileNameSubstring} foi criado com sucesso!");
 
@@ -123,7 +140,9 @@ namespace Johnny {
                 Console.WriteLine($"{file} movido para o novo diretorio alfabetico com sucesso");
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else if (File.Exists(destinoLetra + file.Name)) {
+            }
+            else if (File.Exists(destinoLetra + file.Name))
+            {
                 CriaDirBackup();
                 string destinoBackup = @"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\";
 
@@ -138,7 +157,9 @@ namespace Johnny {
                     $"sucesso e substituiu o arquivo deste dir");
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else {
+            }
+            else
+            {
                 File.Move(file.FullName, destinoLetra + file.Name);
 
                 Console.WriteLine($"{file} movido para o diretorio alfabetico já existente com sucesso");
@@ -147,20 +168,24 @@ namespace Johnny {
             }
         }
 
-        static void MovedorResto(FileInfo file) {
+        static void MovedorResto(FileInfo file)
+        {
             string destinoResto = @"C:\Users\vinicius.waltrick\Documents\Johnny\resto\";
             string fileNameSubstring = file.Name.Substring(0, 1);
             string destinoLetra = (@"C:\Users\vinicius.waltrick\Documents\Johnny\resto\" + fileNameSubstring + @"\");
 
-            if (!Directory.Exists(destinoResto + fileNameSubstring)) {
-                DirectoryInfo dir = Directory.CreateDirectory(destinoResto + fileNameSubstring);
+            if (!Directory.Exists(destinoResto + fileNameSubstring))
+            {
+                Directory.CreateDirectory(destinoResto + fileNameSubstring);
 
                 Console.WriteLine(@$"O diretório {fileNameSubstring} foi criado com sucesso!");
 
                 File.Move(file.FullName, destinoLetra + file.Name);
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else if (File.Exists(destinoLetra + file.Name)) {
+            }
+            else if (File.Exists(destinoLetra + file.Name))
+            {
                 CriaDirBackup();
                 string destinoBackup = @"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\";
 
@@ -175,7 +200,9 @@ namespace Johnny {
                     $"sucesso e substituiu o arquivo deste dir");
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
 
-            } else {
+            }
+            else
+            {
                 File.Move(file.FullName, destinoLetra + file.Name);
 
                 Console.WriteLine($"{file} movido para o diretorio alfabetico já existente com sucesso");
@@ -184,22 +211,26 @@ namespace Johnny {
             }
         }
 
-        static void MovedorTexto(FileInfo file) {
+        static void MovedorTexto(FileInfo file)
+        {
             string destinoTexto = @"C:\Users\vinicius.waltrick\Documents\Johnny\texto\";
             string fileNameSubstring = file.Name.Substring(0, 1);
             string destinoLetra = (@"C:\Users\vinicius.waltrick\Documents\Johnny\texto\" + fileNameSubstring + @"\");
 
             AlteraTexto(file.FullName);
 
-            if (!Directory.Exists(destinoTexto + fileNameSubstring)) {
-                DirectoryInfo dir = Directory.CreateDirectory(destinoTexto + fileNameSubstring);
+            if (!Directory.Exists(destinoTexto + fileNameSubstring))
+            {
+                Directory.CreateDirectory(destinoTexto + fileNameSubstring);
 
                 Console.WriteLine(@$"O diretório {fileNameSubstring} foi criado com sucesso!");
 
                 File.Move(file.FullName, destinoLetra + file.Name);
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else if (File.Exists(destinoLetra + file.Name)) {
+            }
+            else if (File.Exists(destinoLetra + file.Name))
+            {
                 CriaDirBackup();
 
                 string destinoBackup = @"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\";
@@ -214,7 +245,9 @@ namespace Johnny {
                     $"sucesso e substituiu o arquivo deste dir");
 
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
-            } else {
+            }
+            else
+            {
                 File.Move(file.FullName, destinoLetra + file.Name);
 
                 Console.WriteLine($"{file} movido para o diretorio alfabetico já existente com sucesso");
@@ -222,79 +255,103 @@ namespace Johnny {
                 relatorio = relatorio + "\n" + $"{file.Name} -- LWT: {file.LastWriteTime}";
             }
         }
-        static void MoveMusica() {
-            foreach (FileInfo file in diretorio.GetFiles("*.mp3")) {
+        static void MoveMusica()
+        {
+            foreach (FileInfo file in diretorio.GetFiles("*.mp3"))
+            {
                 MovedorMusica(file);
             }
-            foreach (FileInfo file in diretorio.GetFiles("*.wav")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.wav"))
+            {
                 MovedorMusica(file);
             }
-            foreach (FileInfo file in diretorio.GetFiles("*.wma")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.wma"))
+            {
                 MovedorMusica(file);
             }
         }
 
-        static void MoveImagem() {
-            foreach (FileInfo file in diretorio.GetFiles("*.pdf")) {
+        static void MoveImagem()
+        {
+            foreach (FileInfo file in diretorio.GetFiles("*.pdf"))
+            {
                 MovedorImagem(file);
             }
 
-            foreach (FileInfo file in diretorio.GetFiles("*.gif")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.gif"))
+            {
                 MovedorImagem(file);
             }
 
-            foreach (FileInfo file in diretorio.GetFiles("*.png")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.png"))
+            {
                 MovedorImagem(file);
             }
         }
 
-        static void MoveVideo() {
-            foreach (FileInfo file in diretorio.GetFiles("*.mp4")) {
+        static void MoveVideo()
+        {
+            foreach (FileInfo file in diretorio.GetFiles("*.mp4"))
+            {
                 MovedorVideo(file);
             }
-            foreach (FileInfo file in diretorio.GetFiles("*.mkv")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.mkv"))
+            {
                 MovedorVideo(file);
             }
         }
 
-        static void MoveResto() {
+        static void MoveResto()
+        {
 
-            foreach (FileInfo file in diretorio.GetFiles("*.rar")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.rar"))
+            {
                 MovedorResto(file);
             }
-            foreach (FileInfo file in diretorio.GetFiles("*.zip")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.zip"))
+            {
                 MovedorResto(file);
             }
-            foreach (FileInfo file in diretorio.GetFiles("*.msi")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.msi"))
+            {
                 MovedorResto(file);
             }
         }
 
-        static void MoveTexto() {
+        static void MoveTexto()
+        {
 
-            foreach (FileInfo file in diretorio.GetFiles("*.txt")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.txt"))
+            {
                 MovedorTexto(file);
             }
 
-            foreach (FileInfo file in diretorio.GetFiles("*.xml")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.xml"))
+            {
                 MovedorTexto(file);
             }
 
-            foreach (FileInfo file in diretorio.GetFiles("*.html")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.html"))
+            {
                 MovedorTexto(file);
             }
-            foreach (FileInfo file in diretorio.GetFiles("*.csv")) {
+            foreach (FileInfo file in diretorio.GetFiles("*.csv"))
+            {
                 MovedorTexto(file);
             }
             ManipulaPdf(relatorio);
         }
 
-        static void CriaDirMusica() {
+        static void CriaDirMusica()
+        {
             string destinoMusica = (@"C:\Users\vinicius.waltrick\Documents\Johnny\musica\");
-            if (Directory.Exists(destinoMusica)) {
+            if (Directory.Exists(destinoMusica))
+            {
                 Console.WriteLine(@"O diretório ""musica"" já existe!");
                 MoveMusica();
-            } else {
+            }
+            else
+            {
                 DirectoryInfo dir = new DirectoryInfo(diretorio.ToString());
 
                 FileInfo[] arquivosMp3 = dir.GetFiles("*.mp3");
@@ -303,25 +360,32 @@ namespace Johnny {
 
                 if (arquivosMp3.Length > 0
                     || arquivosWav.Length > 0
-                    || arquivosWma.Length > 0) {
-                    DirectoryInfo directory = Directory.CreateDirectory(destinoMusica);
+                    || arquivosWma.Length > 0)
+                {
+                    Directory.CreateDirectory(destinoMusica);
 
                     Console.WriteLine(@"Diretório ""musica"" criado com sucesso!");
                     MoveMusica();
-                } else {
+                }
+                else
+                {
                     Console.WriteLine(@"Não há arquivos para criar a pasta ""musica""");
                 }
             }
         }
 
 
-        static void CriaDirImagem() {
+        static void CriaDirImagem()
+        {
             string destinoImagem = (@"C:\Users\vinicius.waltrick\Documents\Johnny\imagem\");
 
-            if (Directory.Exists(destinoImagem)) {
+            if (Directory.Exists(destinoImagem))
+            {
                 Console.WriteLine(@"O diretório ""imagem"" já existe");
                 MoveImagem();
-            } else {
+            }
+            else
+            {
                 DirectoryInfo dir = new DirectoryInfo(diretorio.ToString());
 
                 FileInfo[] arquivosTxt = dir.GetFiles("*.txt");
@@ -332,47 +396,61 @@ namespace Johnny {
                 if (arquivosTxt.Length > 0
                     || arquivosCsv.Length > 0
                     || arquivosHtml.Length > 0
-                    || arquivosXml.Length > 0) {
-                    DirectoryInfo directory = Directory.CreateDirectory(destinoImagem);
+                    || arquivosXml.Length > 0)
+                {
+                    Directory.CreateDirectory(destinoImagem);
 
                     Console.WriteLine(@"Diretório ""imagem"" criado com sucesso!");
                     MoveImagem();
-                } else {
+                }
+                else
+                {
                     Console.WriteLine(@"Não há arquivos para criar a pasta ""imagem""");
                 }
             }
         }
 
-        static void CriaDirVideo() {
+        static void CriaDirVideo()
+        {
 
             string destinoVideo = (@"C:\Users\vinicius.waltrick\Documents\Johnny\video\");
-            if (Directory.Exists(destinoVideo)) {
+            if (Directory.Exists(destinoVideo))
+            {
                 Console.WriteLine(@"O diretório ""Video"" já existe");
                 MoveVideo();
-            } else {
+            }
+            else
+            {
                 DirectoryInfo dir = new DirectoryInfo(diretorio.ToString());
 
                 FileInfo[] arquivosMp3 = dir.GetFiles("*.mp4");
                 FileInfo[] arquivosWav = dir.GetFiles("*.mkv");
 
                 if (arquivosMp3.Length > 0
-                    || arquivosWav.Length > 0) {
-                    DirectoryInfo directory = Directory.CreateDirectory(destinoVideo);
+                    || arquivosWav.Length > 0)
+                {
+                    Directory.CreateDirectory(destinoVideo);
 
                     Console.WriteLine(@"Diretório ""video"" criado com sucesso!");
                     MoveVideo();
-                } else {
+                }
+                else
+                {
                     Console.WriteLine(@"Não há arquivos para criar a pasta ""video""");
                 }
             }
         }
 
-        static void CriaDirResto() {
+        static void CriaDirResto()
+        {
             string destinoResto = (@"C:\Users\vinicius.waltrick\Documents\Johnny\resto\");
-            if (Directory.Exists(destinoResto)) {
+            if (Directory.Exists(destinoResto))
+            {
                 Console.WriteLine(@"O diretório ""resto"" já existe");
                 MoveResto();
-            } else {
+            }
+            else
+            {
                 DirectoryInfo dir = new DirectoryInfo(diretorio.ToString());
 
                 FileInfo[] arquivosRar = dir.GetFiles("*.rar");
@@ -381,24 +459,31 @@ namespace Johnny {
 
                 if (arquivosRar.Length > 0
                     || arquivosZip.Length > 0
-                    || arquivosMsi.Length > 0) {
-                    DirectoryInfo directory = Directory.CreateDirectory(destinoResto);
+                    || arquivosMsi.Length > 0)
+                {
+                    Directory.CreateDirectory(destinoResto);
 
                     Console.WriteLine(@"Diretório ""resto"" criado com sucesso!");
                     MoveResto();
-                } else {
+                }
+                else
+                {
                     Console.WriteLine(@"Não há arquivos para criar a pasta ""musica""");
                 }
             }
         }
 
-        static void CriaDirTexto() {
+        static void CriaDirTexto()
+        {
             string destinoTexto = @"C:\Users\vinicius.waltrick\Documents\Johnny\texto\";
 
-            if (Directory.Exists(destinoTexto)) {
+            if (Directory.Exists(destinoTexto))
+            {
                 Console.WriteLine(@"O diretório ""texto"" já existe!");
                 MoveTexto();
-            } else {
+            }
+            else
+            {
                 DirectoryInfo dir = new DirectoryInfo(diretorio.ToString());
 
                 FileInfo[] arquivosTxt = dir.GetFiles("*.txt");
@@ -409,26 +494,33 @@ namespace Johnny {
                 if (arquivosTxt.Length > 0
                     || arquivosXml.Length > 0
                     || arquivosHtml.Length > 0
-                    || arquivosCsv.Length > 0) {
-                    DirectoryInfo directory = Directory.CreateDirectory(destinoTexto);
+                    || arquivosCsv.Length > 0)
+                {
+                    Directory.CreateDirectory(destinoTexto);
 
                     Console.WriteLine(@"Diretório ""texto"" criado com sucesso!");
                     MoveTexto();
-                } else {
+                }
+                else
+                {
                     Console.WriteLine(@"Não há arquivos para criar a pasta ""texto""");
                 }
             }
         }
 
-        static void CriaDirBackup() {
-            if (!Directory.Exists(@"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\")) {
-                DirectoryInfo dir = Directory.CreateDirectory(@"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\");
+        static void CriaDirBackup()
+        {
+            if (!Directory.Exists(@"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\"))
+            {
+                Directory.CreateDirectory(@"C:\Users\vinicius.waltrick\Documents\Johnny\Backup\");
                 Console.WriteLine("Diretório Backup criado com sucesso!");
             }
         }
 
-        static void ManipulaPdf(String paragrafo) {
-            if (!File.Exists(destinoPDF)) {
+        static void ManipulaPdf(String paragrafo)
+        {
+            if (!File.Exists(destinoPDF))
+            {
                 FileInfo file = new FileInfo(destinoPDF);
                 file.Directory.Create();
             }
@@ -446,14 +538,14 @@ namespace Johnny {
             Console.WriteLine("\nPDF criado/atualizado com sucesso!\n");
         }
 
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             Console.WriteLine("Iniciando o procedimento de organização de arquivos");
             CriaDirImagem();
             CriaDirMusica();
             CriaDirVideo();
             CriaDirResto();
             CriaDirTexto();
-            //Salve Mister Danas :D
         }
     }
 }
