@@ -16,7 +16,7 @@ namespace Johnny {
         static string relatorio = "";
 
         static void AlteraTexto(String arquivo) {
-
+            
             string diretorio = arquivo;
 
             if (File.ReadAllText(diretorio).Contains("[nomeproprio]")) {
